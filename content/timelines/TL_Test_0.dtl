@@ -1,0 +1,17 @@
+if {str_test} == "new_character":
+	join CH_char_2 4
+else:
+	join CH_char_1 0
+label Choice
+CH_char_1 (default): Test Text
+CH_char_1: Choose
+- A [if {str_test} != "old"]
+- B
+	join tempcharacter 1
+- C
+	set {str_test} = "new_character"
+if {str_test} == "old":
+	set {str_test} = "new_val"
+CH_char_2: {str_test}
+leave CH_char_1
+jump 

@@ -1,0 +1,43 @@
+{
+
+id: test 0
+backround: home
+
+name: annnna
+	kajcsbkabjc.
+	aksjcbakcb
+	abkcsjbac
+	
+>> jumpPoint0
+	
+name: manaaasa
+	akjscbk
+	alksjcnlac
+	aklscjnaklcn
+	
+	# Choices
+	:: 3
+		choice 1
+		choice 2
+		choice 3
+	
+	# comment
+	
+	acasca
+	ascas se
+	asakljnasc
+	
+	
+	>> jumpPoint1
+	
+	ascasascasc
+	asce
+	gfsdssc
+		* choice 1 [varname == 1](varname = 5)
+		* choice 2 
+		
+	[to show choice]
+	(set variable)
+	
+	
+}

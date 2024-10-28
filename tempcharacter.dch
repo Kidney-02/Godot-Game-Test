@@ -1,0 +1,29 @@
+{
+"@path": "res://addons/dialogic/Resources/character.gd",
+"@subpath": NodePath(""),
+"_translation_id": "",
+"color": Color(0.988281, 0.576176, 0.0463257, 1),
+"custom_info": {
+"sound_mood_default": "",
+"sound_moods": {},
+"style": ""
+},
+"default_portrait": "char_1",
+"description": "",
+"display_name": "char_1",
+"mirror": false,
+"nicknames": ["Character 1"],
+"offset": Vector2(0, 0),
+"portraits": {
+"char_1": {
+"export_overrides": {
+"image": "\"res://content/icon.svg\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+}
+},
+"scale": 1.0
+}

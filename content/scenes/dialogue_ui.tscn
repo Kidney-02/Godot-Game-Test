@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://dyt4www2odox1"]
+
+[ext_resource type="Script" path="res://content/scenes/scripts/dialogue_ui.gd" id="1_goluc"]
+[ext_resource type="PackedScene" uid="uid://cpm1p5rgmc63m" path="res://content/scenes/dialogue/dialogue_label.tscn" id="2_37dd6"]
+[ext_resource type="PackedScene" uid="uid://c3pv431g7ifh1" path="res://content/scenes/dialogue/dialogue_choice_buttons.tscn" id="3_3vtni"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_715vm"]
+bg_color = Color(0.0962047, 0.0962048, 0.0962047, 1)
+
+[node name="Background" type="Panel"]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -630.0
+offset_right = -30.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_715vm")
+script = ExtResource("1_goluc")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DialogueLabel" parent="MarginContainer/ScrollContainer/VBox" instance=ExtResource("2_37dd6")]
+layout_mode = 2
+
+[node name="ButtonGroup" parent="MarginContainer/ScrollContainer/VBox" instance=ExtResource("3_3vtni")]
+layout_mode = 2

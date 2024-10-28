@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=3 uid="uid://dahafrs0rt5dc"]
+
+[ext_resource type="Texture2D" uid="uid://e58vxawjbjes" path="res://content/images/background/room.jpg" id="1_kprfv"]
+[ext_resource type="PackedScene" uid="uid://dyt4www2odox1" path="res://content/scenes/dialogue_ui.tscn" id="2_idasv"]
+[ext_resource type="Theme" uid="uid://dn5jc3eemghg4" path="res://content/Themes/ChoiceButton_01.tres" id="3_pee3c"]
+[ext_resource type="Script" path="res://content/scenes/Temp_StartDialogueBtn.gd" id="4_o2a7o"]
+[ext_resource type="Script" path="res://content/scenes/Print_Var.gd" id="5_t01nb"]
+
+[node name="test scene" type="Node2D"]
+
+[node name="bg_image_room" type="Sprite2D" parent="."]
+show_behind_parent = true
+position = Vector2(960, 540)
+texture = ExtResource("1_kprfv")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dialogue UI" parent="UI" instance=ExtResource("2_idasv")]
+visible = false
+layout_direction = 2
+layout_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="UI"]
+layout_mode = 0
+offset_left = 622.0
+offset_top = 663.0
+offset_right = 1126.0
+offset_bottom = 764.0
+focus_mode = 0
+theme = ExtResource("3_pee3c")
+shortcut_feedback = false
+shortcut_in_tooltip = false
+text = "Start Dialogue
+"
+script = ExtResource("4_o2a7o")
+
+[node name="Button2" type="Button" parent="UI"]
+layout_mode = 0
+offset_left = 613.0
+offset_top = 790.0
+offset_right = 1117.0
+offset_bottom = 891.0
+focus_mode = 0
+theme = ExtResource("3_pee3c")
+shortcut_feedback = false
+shortcut_in_tooltip = false
+text = "Print Var
+"
+script = ExtResource("5_t01nb")
+
+[connection signal="pressed" from="UI/Button" to="UI/Button" method="_on_pressed"]
+[connection signal="pressed" from="UI/Button2" to="UI/Button2" method="_on_pressed"]

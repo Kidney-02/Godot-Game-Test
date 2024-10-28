@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://qajygjxvc4lq"]
+
+[ext_resource type="Theme" uid="uid://dn5jc3eemghg4" path="res://content/Themes/ChoiceButton_01.tres" id="1_cp1c5"]
+[ext_resource type="Script" path="res://content/scenes/dialogue/dialogue_button.gd" id="2_58sy8"]
+
+[node name="Button" type="Button"]
+focus_mode = 0
+theme = ExtResource("1_cp1c5")
+theme_override_font_sizes/font_size = 50
+text = "Button		"
+script = ExtResource("2_58sy8")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
