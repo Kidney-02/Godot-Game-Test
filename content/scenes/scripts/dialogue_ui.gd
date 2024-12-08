@@ -5,7 +5,8 @@ var ScrollCont
 var base_label = preload("res://content/scenes/dialogue/dialogue_label.tscn")
 var base_button_group = preload("res://content/scenes/dialogue/dialogue_choice_buttons.tscn")
 
-var text_file :String = "res://content/dialogue/test_dialogue.txt"
+@export var text_file :String = "res://content/dialogue/test_dialogue.txt"
+
 var line_num = 0
 #var dialogue = []
 var text_dlg
@@ -189,7 +190,6 @@ func loadFile(file :String) -> String:
 func scrollDown() -> void:
 	
 	await ScrollCont.get_v_scroll_bar().changed
-	
 
 	ScrollCont.scroll_vertical = ScrollCont.get_v_scroll_bar().get_max()
 	
