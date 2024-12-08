@@ -27,7 +27,7 @@ grow_vertical = 2
 visible = false
 layout_direction = 2
 layout_mode = 1
-text_file = "res://content/dialogue/empty.txt"
+text_file = "res://content/dialogue/fake_dialogue.txt"
 metadata/_edit_use_anchors_ = true
 
 [node name="Button" type="Button" parent="UI"]
@@ -57,6 +57,7 @@ shortcut_in_tooltip = false
 text = "Print Var
 "
 script = ExtResource("5_t01nb")
+variable_name = "cutie_points"
 
 [connection signal="pressed" from="UI/Button" to="UI/Button" method="_on_pressed"]
 [connection signal="pressed" from="UI/Button2" to="UI/Button2" method="_on_pressed"]
