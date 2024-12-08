@@ -9,6 +9,7 @@ var text_file :String = "res://content/dialogue/test_dialogue.txt"
 var line_num = 0
 #var dialogue = []
 var text_dlg
+var line_count
 
 var on_screen :bool = false
 
@@ -26,37 +27,39 @@ func _ready() -> void:
 	
 	clearNode(VBox)
 	
-	#base_label.get_child(0).text = ""
 	
-	#label.get_child(0).text = loadFile(text_file)
-	#VBox.add_child(button_group)
-	text_dlg = loadFile(text_file)
-	#label.get_child(0).text = ""
+	text_dlg = loadFile(text_file)	
+	line_count = text_dlg.countn("\n")
+	print(line_count)
+	
 	
 func _process(delta):
 	pass
 	
 #
-func _shortcut_input(event):
+func _input(event):
 	if not on_screen:
 		return
 			
-	if Input.is_action_just_pressed("NewLine"):
+	if event.is_action_pressed("NewLine"):
 		if not can_scroll:
 			return
-		
+			
 		#print(event)
 		addLine(text_dlg)
-	elif Input.is_action_just_pressed("Exit"):
+	elif event.is_action_pressed("Exit"):
 		exit_dialogueUI()
 		
 
 	
 ####################################  Parse Text File  ################################
-func addLine(dlg_text: String):
+func addLine(text: String):
 	
+	if line_num > line_count:
+		return
+		
 	
-	var line = readLine(dlg_text)
+	var line = readLine(text)
 	var line_start = line.get_slice(" ", 0)
 	
 	match line_start:
@@ -69,7 +72,7 @@ func addLine(dlg_text: String):
 			
 			var choices = []
 			for i in range(num_buttons):
-				var choice = readLine(dlg_text)
+				var choice = readLine(text)
 				#print(i, choice)
 				choices.append(choice)
 			
@@ -77,31 +80,27 @@ func addLine(dlg_text: String):
 			buttons.makeButtons(choices)
 			
 			VBox.add_child(buttons)
-			
-			
 			pass
 			
 		">>": # jump to
 			var jump_tag = line.get_slice(" ", 1)
 			print(jump_tag)
 			
-			jump_to(dlg_text, jump_tag, true)
+			jump_to(text, jump_tag, true)
 			
-			line = readLine(dlg_text)
+			line = readLine(text)
 			new_dialogue_line(line)
 			pass			
-			
-		#"":
-			#pass			
+		
+		"<<fileover>>":
+			pass		
 		
 		_:	## DEFAULT
 			
 			new_dialogue_line(line)
-			
-			
 			pass
 			
-	
+		
 	scrollDown()
 	
 
@@ -112,11 +111,15 @@ func exit_dialogueUI() -> void:
 	
 func readLine(text: String) -> String:
 	var line = ""
+	
 	while line == "" or line.left(1) == "#":
 		line = text.get_slice("\n", line_num)
-
+		
 		line_num += 1
-	
+		
+		if line_num > line_count:			
+			return "<<fileover>>"
+			
 	return line
 	
 	
@@ -130,14 +133,34 @@ func jump_to(text: String, jump_tag: String, forward: bool):
 		
 	var line = ""
 	
-	while line.left(2) != "<<":
-		line = text.get_slice("\n", jump_line)
-		jump_line += 1
+	#line_num = find_jump_line(jump_tag, jump_line, text)
+	while jump_line < line_count:
 		
+		line = text.get_slice("\n", jump_line)
+
+
+		jump_line += 1
+		if line.left(2) == "<<"  && line.right(-3) == jump_tag:
+			break
+	
 	line_num = jump_line
 	
 	pass
 
+
+func find_jump_line(jump_tag :String, jump_line: int, text :String):
+	
+	var line = text.get_slice("\n", jump_line)
+	print (line)
+	
+	if line.left(2) == "<<" :
+		return jump_line
+	
+	jump_line += 1
+	#find_jump_line(jump_tag, jump_line, text)
+	
+	pass
+	
 
 func new_dialogue_line(line :String) -> void:
 	var dialogue = base_label.instantiate()
@@ -145,6 +168,7 @@ func new_dialogue_line(line :String) -> void:
 	VBox.add_child(dialogue)
 	
 	pass
+
 
 func clearNode(node :Node):
 	
